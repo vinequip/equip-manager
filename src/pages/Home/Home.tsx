@@ -5,7 +5,8 @@ import { auth, db } from "../../firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { collection, getDocs, getDoc, query, where } from "firebase/firestore";
-import { logOutUser } from "../../slice/authSlice";
+import { logOutUser } from "../../redux/slice/authSlice";
+import styles from "./home.module.css";
 
 interface UserData {
   id: string;
@@ -19,6 +20,8 @@ function Home() {
   const [user, setUser] = useState<UserData[] | null>(null);
   const userEmail = useSelector((state: RootState) => state.auth.userEmail);
   const role = useSelector((state: RootState) => state.auth.role);
+  const lastName = useSelector((state: RootState) => state.auth.lastName);
+  const firstName = useSelector((state: RootState) => state.auth.firstName);
   const dispatch = useDispatch();
 
   const userCollectionRef = collection(db, "users");
@@ -39,22 +42,19 @@ function Home() {
     getUser();
   }, []);
 
-  const logOut = async () => {
-    await signOut(auth);
-    dispatch(logOutUser());
-    navigate("/login");
-  };
-
   return (
-    <>
-      <div>Home</div>
-      <div>{userEmail}</div>
-      <div>{role}</div>
-      <div>
-        <button onClick={logOut}>LogOut</button>
+    <div className={styles.home__container}>
+      <div className={styles.userinfo__holder}>
+        <div className={styles.user__info}>
+          <p className={styles.info__title}>
+            {firstName} {lastName}
+          </p>
+          <p className={styles.info__title}>{userEmail}</p>
+          <p className={styles.info__title}>{role}</p>
+        </div>
       </div>
-      <Link to="/workers">Workers</Link>
-    </>
+      <div>Home</div>
+    </div>
   );
 }
 

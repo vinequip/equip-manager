@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { useDispatch } from "react-redux";
 import { auth } from "../../firebase/firebase";
-import { addUser, logOutUser } from "../../slice/authSlice";
+import { addUser, logOutUser } from "../../redux/slice/authSlice";
 import { DocumentData, QuerySnapshot, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
@@ -97,7 +97,7 @@ function Login() {
         </form>
         <Link to="/signup">Sign Up</Link>
       </div>
-      <button onClick={logOut}>LLLLLLLOGOOOT</button>
+     
     </div>
   );
 }

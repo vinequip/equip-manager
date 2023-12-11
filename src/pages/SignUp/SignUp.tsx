@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../slice/authSlice";
+import { addUser } from "../../redux/slice/authSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 

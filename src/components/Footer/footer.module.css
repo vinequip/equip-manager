@@ -1,0 +1,20 @@
+.footer{
+    background-color: var(--main-black);
+    padding: 15px 10px;
+}
+.footer__container{
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content:space-between;
+   
+}
+.content{
+    color: var(--main-white);
+    font-weight: 700;
+}
+.product{
+    color: #6FA8AD;
+    font-size: 28px;
+    font-weight: 600;
+}

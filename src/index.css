@@ -12,6 +12,19 @@ html {
   text-size-adjust: none;
 }
 
+:root {
+  /* FONTS Advent Pro, Neucha  */
+  /* --main-fonts: 'Advent Pro', sans-serif */
+  --main-font: "Advent Pro", sans-serif;
+  --note-font: "Neucha", cursive;
+
+  /* background-color */
+  --main-black: #303030;
+  --main-white: #FAFAFB;
+  --link-hover: #6FA8AD;
+
+}
+
 /* Remove default margin in favour of better control in authored CSS */
 body,
 h1,
@@ -24,18 +37,21 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  font-size: 16px;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
+  padding: 0;
 }
 
 /* Set core body defaults */
 body {
   min-height: 100vh;
   background-color: rgb(223, 223, 223);
+  font-family: var(--main-font);
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -58,9 +74,13 @@ h4 {
 }
 
 /* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
+a {
+  text-decoration: none;
   color: currentColor;
+}
+a:hover{
+  color: var(--link-hover);
+  transition: ease 0.5s ;
 }
 
 /* Make images easier to work with */
@@ -89,9 +109,12 @@ textarea:not([rows]) {
 }
 
 .container {
-  max-width: 1400px;
-
-  margin: 0 auto;
-  padding: 10px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.holder{
+  max-width: 1400px;
+  margin: auto;
+  padding: 10px;
 }
