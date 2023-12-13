@@ -1,36 +1,36 @@
 .form__container {
-    background-color: #363636;
-    max-width: 350px;
-    margin: 0 auto;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  
-  /* INPUT */
-.input__container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .input__lable {
-    font-size: 20px;
-    color: var(--main-white);
-    padding-left: 8px;
-  }
-  .input {
-    font-size: 18px;
-    padding: 5px;
-    background-color: var(--main-white);
-    border: 2px solid var(--main-white);
-  }
-  .input__error {
-    border: 2px solid var(--error-msg);
-  }
-  .error__msg {
-    height: 25px;
-    font-family: var(--note-font);
-    color: var(--error-msg);
-  }
+  background-color: #363636;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.firebaseError__msg {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 600;
+  height: 25px;
+  font-family: var(--note-font);
+  color: var(--error-msg);
+}
+.haveAccount {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+.haveAccount__title {
+  font-size: 18px;
+  color: var(--main-white);
+}
+.login__link {
+  font-size: 18px;
+  color: var(--link-hover);
+  font-weight: 700;
+  transition: all ease-in-out 0.3s;
+}
+.login__link:hover {
+  color: var(--link-hover-light);
+}

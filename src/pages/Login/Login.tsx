@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./login.module.css";
 import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/slice/authSlice";
+
 import { auth } from "../../firebase/firebase";
-import { addUser, logOutUser } from "../../redux/slice/authSlice";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import {
   DocumentData,
   QuerySnapshot,
@@ -14,20 +14,17 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
-import logo from "../../assets/logoEM3.png";
+
 import RegistrationContainer from "../../components/Registration/RegistrationContainer/RegistrationContainer";
 import RegistrationBtn from "../../components/Registration/RegistrationBtn/RegistrationBtn";
 import RegistrationInput from "../../components/Registration/RegistrationInput/RegistrationInput";
+
+import styles from "./login.module.css";
 
 type UserInfoProp = {
   userEmail: string;
   userPassword: string;
 };
-
-// type ErrorProp = {
-//   errorEmail: string;
-//   errorPassword: string;
-// }
 
 console.log("AUTH -->", auth);
 
@@ -90,7 +87,6 @@ function Login() {
     setErrorPassword("");
     setFirebaseError("");
 
-    console.log(userInfo.userEmail);
     if (userInfo.userEmail.length === 0) {
       setErrorEmail("Обо'язкове поля для заповнення");
       return;
@@ -125,61 +121,25 @@ function Login() {
       <form className={styles.form__container} onSubmit={handleSubmit}>
         <div className={styles.input__container}>
           <RegistrationInput
-           type="email"
-           value={userInfo.userEmail}
-           setValue={(elem) => setUserInfo({ ...userInfo, userEmail: elem })}
-           error={errorEmail}
-           placeholder="Введіть вашу пошту..."
-           label="Пошта"
-           />
-          {/* <label className={styles.input__lable} htmlFor="email">
-            Пошта
-          </label>
-          <input
-            className={
-              !errorEmail
-                ? styles.input
-                : [styles.input, styles.input__error].join(" ")
-            }
-            id="email"
             type="email"
             value={userInfo.userEmail}
+            setValue={(elem) => setUserInfo({ ...userInfo, userEmail: elem })}
+            error={errorEmail}
             placeholder="Введіть вашу пошту..."
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, userEmail: e.target.value })
-            }
+            label="Пошта"
           />
-          <div className={styles.error__msg}>
-            {errorEmail ? errorEmail : ""}
-          </div> */}
         </div>
         <div className={styles.input__container}>
-        <RegistrationInput
-           type="password"
-           value={userInfo.userPassword}
-           setValue={(elem) => setUserInfo({ ...userInfo, userPassword: elem })}
-           error={errorPassword}
-           placeholder="Введіть ваш пароль..."
-           label="Пароль"
-           />
-          {/* <label className={styles.input__lable} htmlFor="email">
-            Пароль
-          </label>
-          <input
-            className={
-              !errorPassword
-                ? styles.input
-                : [styles.input, styles.input__error].join(" ")
-            }
+          <RegistrationInput
             type="password"
-            placeholder="Введіть ваш пароль..."
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, userPassword: e.target.value })
+            value={userInfo.userPassword}
+            setValue={(elem) =>
+              setUserInfo({ ...userInfo, userPassword: elem })
             }
+            error={errorPassword}
+            placeholder="Введіть ваш пароль..."
+            label="Пароль"
           />
-          <div className={styles.error__msg}>
-            {errorPassword ? errorPassword : ""}
-          </div> */}
         </div>
         <RegistrationBtn title="Увійти" />
         <div className={styles.firebaseError__msg}>{firebaseError}</div>

@@ -28,8 +28,11 @@ function SignUp() {
     role: "",
   });
 
+  const [errorFirstName, setErrorFirstName] = useState("");
+  const [errorLastName, setErrorLastName] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [firebaseError, setFirebaseError] = useState("");
 
   const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
@@ -37,16 +40,45 @@ function SignUp() {
   const customersCollectionRef = collection(db, "customers");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+    setErrorFirstName("")
+    setErrorLastName("")
+    setErrorEmail("");
+    setErrorPassword("");
+    setFirebaseError("");
+
     e.preventDefault();
-    if (
-      !userInfo.userPassword ||
-      !userInfo.userEmail ||
-      !userInfo.firstName ||
-      !userInfo.lastName
-    ) {
-      setError("Need to add!");
-      return;
+
+    if (!userInfo.firstName){
+      setErrorFirstName("Обо'язкове поля для заповнення")
+      return
     }
+    if (!userInfo.lastName){
+      setErrorLastName("Обо'язкове поля для заповнення")
+      return
+    }
+    if (!userInfo.userEmail){
+      setErrorEmail("Обо'язкове поля для заповнення")
+      return
+    }
+    if (!userInfo.userPassword){
+      setErrorPassword("Обо'язкове поля для заповнення")
+      return
+    } 
+    if (userInfo.userPassword.length < 6){
+      setErrorPassword("Пароль має містити не менше 6 символів")
+      return
+    } 
+
+    // if (
+    //   !userInfo.userPassword ||
+    //   !userInfo.userEmail ||
+    //   !userInfo.firstName ||
+    //   !userInfo.lastName
+    // ) {
+    //   setError("Need to add!");
+    //   return;
+    // }
 
     const addToDb = async (email: string | null, uid: string | null) => {
       await addDoc(customersCollectionRef, {
@@ -80,79 +112,59 @@ function SignUp() {
         );
         navigate("/");
       })
-      .catch((error) => setError(error.code));
+      .catch((error) => {
+        console.log(error.code);
+        if (error.code === 'auth/email-already-in-use'){
+          setFirebaseError('Користувач з такою поштою вже існує');
+        }
+      });
   };
 
-  // const setV = (elem: string) => {
-  //   setUserInfo({...userInfo, userEmail: elem})
-  // }
   console.log("userInfo --->", userInfo);
   return (
     <RegistrationContainer title="Реєстрація">
       <form className={styles.form__container} onSubmit={handleSubmit}>
         <RegistrationInput
+          type="firstName"
+          value={userInfo.firstName}
+          setValue={(elem) => setUserInfo({ ...userInfo, firstName: elem })}
+          error={errorFirstName}
+          placeholder="Введіть ваше ім'я..."
+          label="Ім'я"
+        />
+        <RegistrationInput
+          type="lastName"
+          value={userInfo.lastName}
+          setValue={(elem) => setUserInfo({ ...userInfo, lastName: elem })}
+          error={errorLastName}
+          placeholder="Введіть ваше прізвище..."
+          label="Прізвище"
+        />
+        <RegistrationInput
           type="email"
           value={userInfo.userEmail}
           setValue={(elem) => setUserInfo({ ...userInfo, userEmail: elem })}
           error={errorEmail}
-          placeholder="email"
+          placeholder="Введіть вашу пошту..."
           label="Пошта"
         />
-        {/* <div className={styles.input__container}>
-          <label className={styles.input__lable} htmlFor="email">
-            Пошта
-          </label>
-          <input
-            className={
-              !errorEmail
-                ? styles.input
-                : [styles.input, styles.input__error].join(" ")
-            }
-            id="email"
-            type="email"
-            value={userInfo.userEmail}
-            placeholder="Введіть вашу пошту..."
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, userEmail: e.target.value })
-            }
-          />
-          <div className={styles.error__msg}>
-            {errorEmail ? errorEmail : ""}
-          </div>
-        </div> */}
-        <input
-          type="text"
-          placeholder="Your first name..."
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, firstName: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Your last name..."
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, lastName: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Your email..."
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, userEmail: e.target.value })
-          }
-        />
-        <input
+        <RegistrationInput
           type="password"
-          placeholder="Your password..."
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, userPassword: e.target.value })
-          }
+          value={userInfo.userPassword}
+          setValue={(elem) => setUserInfo({ ...userInfo, userPassword: elem })}
+          error={errorPassword}
+          placeholder="Введіть ваш пароль..."
+          label="Пароль"
         />
         <RegistrationBtn title="Зареєструватися" />
+        <div className={styles.firebaseError__msg}>{firebaseError}</div>
       </form>
-      {error && <p className={styles.error}>{error}</p>}
-      <Link to="/login">LOGIN</Link>
+      <div className={styles.haveAccount}>
+        <p className={styles.haveAccount__title}>Я вже маю обліковий запис.</p>
+        <Link className={styles.login__link} to="/login">
+          Вхід в систему
+        </Link>
+      </div>
     </RegistrationContainer>
   );
 }

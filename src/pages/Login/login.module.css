@@ -5,31 +5,7 @@
   padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-.input__container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.input__lable {
-  font-size: 20px;
-  color: var(--main-white);
-  padding-left: 8px;
-}
-.input {
-  font-size: 18px;
-  padding: 5px;
-  background-color: var(--main-white);
-  border: 2px solid var(--main-white);
-}
-.input__error {
-  border: 2px solid var(--error-msg);
-}
-.error__msg {
-  height: 25px;
-  font-family: var(--note-font);
-  color: var(--error-msg);
+  gap: 10px;
 }
 .firebaseError__msg {
   text-align: center;
@@ -42,18 +18,12 @@
 .forgetPassword {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
   margin-top: 15px;
 }
 .forgetPassword__title {
   font-size: 18px;
   color: var(--main-white);
-}
-.forgetPassword__link {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--error-msg);
-  transition: all ease-in-out 0.3s;
 }
 .createUser__link,
 .forgetPassword__link {
