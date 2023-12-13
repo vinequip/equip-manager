@@ -12,8 +12,11 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { RootState } from "../../store";
 import { useSelector } from "react-redux";
+import { BsFillPersonLinesFill } from "react-icons/bs";
 
-interface WorkerData {
+import styles from './workers.module.css'
+
+type WorkerData = {
   id: string;
   firstName: string;
   lastName: string;
@@ -82,19 +85,20 @@ function Workers() {
   //   console.log("customers -->", customers);
 
   return (
-    <div>
-      <h1 style={{ textAlign: "center", padding: "20px" }}>Workers!</h1>
+    <div className="holder">
+      <h2 className={styles.workers__title}>список працівників</h2>
+
       {workers?.length !== 0 ? (
-        <>
+        <div className={styles.workers__list}>
+         <BsFillPersonLinesFill size={45} color='var(--main-white)'/>
           {workers?.map((item) => (
             <Link key={item.id} to={`/workers/${item.id}`}>
-              <div style={{ background: "green", margin: "5px" }}>
-                <p>І'мя - {item.firstName}</p>
-                <p>Прізвище - {item.lastName}</p>
+              <div className={styles.worker__holder}>
+                <p  className={styles.worker__info}>{item.firstName} {item.lastName}</p>
               </div>
             </Link>
           ))}
-        </>
+        </div>
       ) : (
         <></>
       )}

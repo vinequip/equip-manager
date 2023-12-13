@@ -1,0 +1,22 @@
+.reg__container {
+  position: relative;
+  background-color: var(--main-black);
+  min-height: 100vh;
+  padding: 0 5px;
+}
+.logo__holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px 0 0px;
+}
+.logo {
+  width: 350px;
+}
+.title {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--main-white);
+  margin: 20px 0 20px 0;
+}

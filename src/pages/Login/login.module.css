@@ -1,6 +1,68 @@
-.title{
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: 600;
+.form__container {
+  background-color: #363636;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input__lable {
+  font-size: 20px;
+  color: var(--main-white);
+  padding-left: 8px;
+}
+.input {
+  font-size: 18px;
+  padding: 5px;
+  background-color: var(--main-white);
+  border: 2px solid var(--main-white);
+}
+.input__error {
+  border: 2px solid var(--error-msg);
+}
+.error__msg {
+  height: 25px;
+  font-family: var(--note-font);
+  color: var(--error-msg);
+}
+.firebaseError__msg {
+  text-align: center;
+  font-weight: 600;
+  height: 25px;
+  font-family: var(--note-font);
+  color: var(--error-msg);
+}
+
+.forgetPassword {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+.forgetPassword__title {
+  font-size: 18px;
+  color: var(--main-white);
+}
+.forgetPassword__link {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--error-msg);
+  transition: all ease-in-out 0.3s;
+}
+.createUser__link,
+.forgetPassword__link {
+  font-size: 18px;
+  color: var(--link-hover);
+  font-weight: 700;
+  transition: all ease-in-out 0.3s;
+}
+.createUser__link:hover,
+.forgetPassword__link:hover {
+  color: var(--link-hover-light);
 }

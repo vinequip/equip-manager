@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/slice/authSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
+import RegistrationContainer from "../../components/Registration/RegistrationContainer/RegistrationContainer";
+import RegistrationBtn from "../../components/Registration/RegistrationBtn/RegistrationBtn";
+import RegistrationInput from "../../components/Registration/RegistrationInput/RegistrationInput";
 
 type UserInfoProp = {
   userEmail: string;
@@ -22,13 +25,17 @@ function SignUp() {
     userPassword: "",
     lastName: "",
     firstName: "",
-    role: ""
+    role: "",
   });
+
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+
   const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const customersCollectionRef = collection(db, "customers");
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
@@ -42,8 +49,14 @@ function SignUp() {
     }
 
     const addToDb = async (email: string | null, uid: string | null) => {
-      await addDoc(customersCollectionRef, { userEmail: email, uid: uid, firstName: userInfo.firstName, lastName: userInfo.lastName, role: 'customer'})
-    }
+      await addDoc(customersCollectionRef, {
+        userEmail: email,
+        uid: uid,
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+        role: "customer",
+      });
+    };
 
     await createUserWithEmailAndPassword(
       auth,
@@ -52,20 +65,61 @@ function SignUp() {
     )
       .then((response) => {
         const user = response.user;
-        const email = user.email
-        const uid  = user.uid
+        const email = user.email;
+        const uid = user.uid;
         console.log("SingUp user ---> SUCCESS");
-        addToDb(email, uid)
-        dispatch(addUser({ userEmail: user.email, uid: user.uid, firstName: userInfo.firstName, lastName: userInfo.lastName, role: 'customer' }));
+        addToDb(email, uid);
+        dispatch(
+          addUser({
+            userEmail: user.email,
+            uid: user.uid,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            role: "customer",
+          })
+        );
         navigate("/");
       })
       .catch((error) => setError(error.code));
   };
 
+  // const setV = (elem: string) => {
+  //   setUserInfo({...userInfo, userEmail: elem})
+  // }
+  console.log("userInfo --->", userInfo);
   return (
-    <div>
-      <h1 style={{ textAlign: "center", marginBottom: "30px" }}> Sign Up</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
+    <RegistrationContainer title="Реєстрація">
+      <form className={styles.form__container} onSubmit={handleSubmit}>
+        <RegistrationInput
+          type="email"
+          value={userInfo.userEmail}
+          setValue={(elem) => setUserInfo({ ...userInfo, userEmail: elem })}
+          error={errorEmail}
+          placeholder="email"
+          label="Пошта"
+        />
+        {/* <div className={styles.input__container}>
+          <label className={styles.input__lable} htmlFor="email">
+            Пошта
+          </label>
+          <input
+            className={
+              !errorEmail
+                ? styles.input
+                : [styles.input, styles.input__error].join(" ")
+            }
+            id="email"
+            type="email"
+            value={userInfo.userEmail}
+            placeholder="Введіть вашу пошту..."
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, userEmail: e.target.value })
+            }
+          />
+          <div className={styles.error__msg}>
+            {errorEmail ? errorEmail : ""}
+          </div>
+        </div> */}
         <input
           type="text"
           placeholder="Your first name..."
@@ -95,11 +149,11 @@ function SignUp() {
             setUserInfo({ ...userInfo, userPassword: e.target.value })
           }
         />
-        <button type="submit">SignUp</button>
+        <RegistrationBtn title="Зареєструватися" />
       </form>
       {error && <p className={styles.error}>{error}</p>}
       <Link to="/login">LOGIN</Link>
-    </div>
+    </RegistrationContainer>
   );
 }
 

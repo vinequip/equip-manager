@@ -22,6 +22,8 @@ html {
   --main-black: #303030;
   --main-white: #FAFAFB;
   --link-hover: #6FA8AD;
+  --link-hover-light: #91e0e8;
+  --error-msg: #f27a7a;
 
 }
 
@@ -80,7 +82,7 @@ a {
 }
 a:hover{
   color: var(--link-hover);
-  transition: ease 0.5s ;
+  transition: ease 0.3s ;
 }
 
 /* Make images easier to work with */
@@ -96,6 +98,9 @@ button,
 textarea,
 select {
   font: inherit;
+  outline: none;
+  border: none;
+  border-radius: 3px;
 }
 
 /* Make sure textarea without a rows attribute are not tiny */
