@@ -1,59 +1,62 @@
-import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth, db } from "../../firebase/firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { collection, getDocs, getDoc, query, where } from "firebase/firestore";
-import { logOutUser } from "../../redux/slice/authSlice";
-import styles from "./home.module.css";
+import UserProfile from "../../components/UserProfile/UserProfile";
+import { MdOutlineMonitor } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
+import { PiOfficeChairFill } from "react-icons/pi";
 
-interface UserData {
-  id: string;
-  email: string;
-  uid: string;
-  // Add other properties as needed
-}
+import styles from "./home.module.css";
+import { Link } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState<UserData[] | null>(null);
-  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-  const role = useSelector((state: RootState) => state.auth.role);
-  const lastName = useSelector((state: RootState) => state.auth.lastName);
-  const firstName = useSelector((state: RootState) => state.auth.firstName);
-  const dispatch = useDispatch();
-
-  const userCollectionRef = collection(db, "users");
-  const customersCollectionRef = collection(db, "customers");
-
-  useEffect(() => {
-    const getUser = async () => {
-      const data = await getDocs(userCollectionRef);
-      setUser(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-          email: doc.data().email,
-          uid: doc.data().uid,
-        }))
-      );
-    };
-    getUser();
-  }, []);
-
   return (
     <div className={styles.home__container}>
-      <div className={styles.userinfo__holder}>
-        <div className={styles.user__info}>
-          <p className={styles.info__title}>
-            {firstName} {lastName}
-          </p>
-          <p className={styles.info__title}>{userEmail}</p>
-          <p className={styles.info__title}>{role}</p>
+      <UserProfile />
+      <div className={styles.devices__container}>
+        <div className={styles.device}>
+          <div className={styles.device__icon}>
+            <PiOfficeChairFill size={35} />
+          </div>
+          <div className={styles.device__info}>
+            <p className={styles.pcs}>5</p>
+            <p className={styles.pcs__used}>
+              використовуються - <span>2</span>
+            </p>
+            <p className={styles.pcs__free}>
+              вільні - <span>3</span>
+            </p>
+          </div>
+          <div className={styles.moreinfo__container}>
+            <Link to='chairs' className={styles.moreinfo__btn}>Детально</Link>
+          </div>
+        </div>
+        <div className={styles.device}>
+          <div className={styles.device__icon}>
+            <MdOutlineMonitor size={35} />
+          </div>
+          <div className={styles.device__info}>
+            <p className={styles.pcs}>50</p>
+            <p className={styles.pcs__used}>
+              використовуються - <span>15</span>
+            </p>
+            <p className={styles.pcs__free}>
+              вільні - <span>34</span>
+            </p>
+          </div>
+        </div>
+        <div className={styles.device}>
+          <div className={styles.device__icon}>
+            <FaLaptopCode size={35} />
+          </div>
+          <div className={styles.device__info}>
+            <p className={styles.pcs}>50</p>
+            <p className={styles.pcs__used}>
+              використовуються - <span>15</span>
+            </p>
+            <p className={styles.pcs__free}>
+              вільні - <span>34</span>
+            </p>
+          </div>
         </div>
       </div>
-      <div>Home</div>
     </div>
   );
 }

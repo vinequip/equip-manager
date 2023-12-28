@@ -1,0 +1,14 @@
+.form__container {
+    background-color: #363636;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+.title{
+    font-size: 28px;
+    text-align: center;
+   padding: 20px 0;
+}

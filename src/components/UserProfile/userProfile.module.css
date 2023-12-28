@@ -1,0 +1,18 @@
+.userinfo__holder{
+    display: flex;
+    justify-content: end;
+}
+.user__info{
+    display: inline-block;
+    margin-top: 5px;
+    background-color: #6FA8AD;
+    text-align: end;
+    color: var(--main-white);
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.info__title{
+    color: var(--main-black);
+    font-size: 18px;
+    font-weight: 500;
+}

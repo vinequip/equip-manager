@@ -10,7 +10,7 @@ function PrivateRoute() {
   
   console.log("privet userRole -->", userRole);
 
-  return <>{(userRole === 'admin') ? <Outlet /> : <Navigate to="/workers" />}</>;
+  return <>{(userRole === 'admin') ? <Outlet /> : <Navigate to="/" />}</>;
 }
 
 export default PrivateRoute;

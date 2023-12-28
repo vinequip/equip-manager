@@ -1,0 +1,46 @@
+.title {
+  font-size: 30px;
+  text-align: center;
+  padding: 15px 0;
+  background-color: var(--card-bg);
+  border-radius: 5px;
+}
+.control__holder{
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+    padding: 10px;
+    gap: 20px;
+}
+
+.chairs__container {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.chair__holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chair__inventory {
+  flex: 2;
+  font-size: 28px;
+  font-weight: 600;
+  
+}
+.chair__owner {
+  flex: 5;
+  font-size: 18px;
+  font-weight: 700;
+}
+.chair__edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

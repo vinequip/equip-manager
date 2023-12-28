@@ -39,7 +39,7 @@ function Header() {
               <Link to="#">Монітори</Link>
             </li>
             <li className={styles.nav__link}>
-              <Link to="#">Стільці</Link>
+              <Link to="/chairs">Стільці</Link>
             </li>
             <li className={styles.nav__link}>
               <Link to="#">Ноутбуки</Link>
