@@ -11,6 +11,7 @@ import Worker from "./pages/Worker/Worker";
 import CreateWorker from "./pages/CreateWorker/CreateWorker";
 import Chairs from "./pages/Chairs/Chairs";
 import CreateChair from "./pages/CreateChair/CreateChair";
+import EditChair from "./pages/EditChair/EditChair";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route element={<RoleRoute />}>
               <Route path="chairs/create" element={<CreateChair />} />
               <Route path="workers/create" element={<CreateWorker />} />
+              <Route path="chair/:id" element={<EditChair />} />
             </Route>
           </Route>
         </Route>

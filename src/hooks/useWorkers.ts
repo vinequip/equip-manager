@@ -33,7 +33,7 @@ function useWorkers() {
     getUser();
   }, []);
 
-  return [workers];
+  return workers;
 }
 
 export default useWorkers;

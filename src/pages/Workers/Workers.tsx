@@ -9,11 +9,10 @@ import Loader from "../../components/Loader/Loader";
 
 function Workers() {
   const userRole = useSelector((state: RootState) => state.auth.role);
-  const [workers] = useWorkers();
+  const workers = useWorkers();
 
   return (
     <>
-      {workers !== null  ? (
         <div className="holder">
           <div className={styles.workers__list}>
             <div className={styles.workers__title}>
@@ -32,9 +31,9 @@ function Workers() {
           </div>
           {userRole === "admin" && <Link to="/workers/create">Create</Link>}
         </div>
-      ) : (
-        <Loader />
-      )}
+      {
+        !workers && <Loader />
+      }
     </>
 
   );

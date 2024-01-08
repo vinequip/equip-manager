@@ -1,0 +1,10 @@
+.select {
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+.select__title {
+  font-size: 20px;
+  color: var(--main-white);
+  padding-left: 8px;
+}

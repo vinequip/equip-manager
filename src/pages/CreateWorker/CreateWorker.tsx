@@ -90,7 +90,7 @@ function CreateWorker() {
           placeholder="Телефон працівника +380..."
           label="Телефон"
         />
-        <RegistrationBtn title="Додати працівника" />
+        <RegistrationBtn title="Додати Працівника" />
       </form>
     </section>
   );
